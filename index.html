@@ -1,1001 +1,1245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AI Didn't Replace My Cybersecurity Skills - It Changed How I Use Them | TheRoguePrince</title>
-
-<!-- SEO & Metadata -->
-<meta name="description" content="Exploring AI-assisted penetration testing using Gemini, Claude, MCP and FastMCP.">
-<link rel="canonical" href="https://therogueprince.github.io/">
-
-<!-- OpenGraph / Facebook -->
-<meta property="og:type" content="article">
-<meta property="og:title" content="AI Didn't Replace My Cybersecurity Skills - It Changed How I Use Them">
-<meta property="og:description" content="Exploring AI-assisted penetration testing using Gemini, Claude, MCP and FastMCP.">
-<meta property="og:url" content="https://therogueprince.github.io/">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Didn't Replace My Cybersecurity Skills - It Changed How I Use Them">
-<meta name="twitter:description" content="Exploring AI-assisted penetration testing using Gemini, Claude, MCP and FastMCP.">
-
-<style>
-/* Direct @font-face declarations for Instrument Serif and Inter */
-
-/* latin-ext */
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zsTjmbI.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Instrument Serif';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa0ZL7SUc.woff2) format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2) format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2) format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-:root {
-  --bg: #faf8f3;
-  --fg: #1f1f1f;
-  --muted: #666;
-  --accent: #d97706;
-  --card: #fff;
-  --nav-bg: rgba(250,248,243,.85);
-  --stage-bg: #f3efe6;
-  --border: #e2ded4;
-}
-
-body.dark {
-  --bg: #0f1115;
-  --fg: #f5f5f5;
-  --muted: #9ca3af;
-  --card: #171a21;
-  --nav-bg: rgba(15,17,21,.85);
-  --stage-bg: #14171e;
-  --border: #262b36;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'Inter', -apple-system, sans-serif;
-  line-height: 1.8;
-  font-size: 1.125rem;
-  transition: background .3s, color .3s;
-  -webkit-font-smoothing: antialiased;
-}
-
-#progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  background: var(--accent);
-  width: 0;
-  z-index: 999;
-}
-
-nav {
-  position: sticky;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 8vw;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: var(--nav-bg);
-  border-bottom: 1px solid var(--border);
-  z-index: 20;
-  transition: background .3s, border-color .3s;
-}
-
-.nav-logo {
-  font-weight: 700;
-  color: var(--fg);
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-button#theme {
-  background: none;
-  border: 1px solid var(--muted);
-  border-radius: 999px;
-  padding: .4rem .8rem;
-  cursor: pointer;
-  color: var(--fg);
-  font-size: 1rem;
-  transition: transform .2s ease;
-}
-
-button#theme:hover { transform: scale(1.08); }
-
-main {
-  max-width: 760px;
-  margin: auto;
-  padding: 5rem 1.5rem;
-}
-
-.wide-container {
-  max-width: 960px;
-  margin: auto;
-}
-
-.hero p.tagline {
-  color: var(--muted);
-  font-size: 1.15rem;
-  margin-bottom: 1rem;
-}
-
-/* Styled Heading matching Instrument Serif visual typography */
-h1, .hero-title {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(3.2rem, 7.5vw, 5rem);
-  line-height: 0.96;
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-}
-
-.hero-word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(15px);
-  animation: wordFade 600ms forwards cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes wordFade {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.hero p.subtitle {
-  color: var(--muted);
-  font-size: 1.25rem;
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  font-weight: 300;
-}
-
-.meta {
-  margin-top: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-section {
-  margin: 5rem 0;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-h2 {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 2.3rem;
-  font-weight: 400;
-  margin: 3.5rem 0 1.25rem 0;
-  color: var(--fg);
-  letter-spacing: -0.01em;
-}
-
-p {
-  margin-bottom: 1.8rem;
-  color: var(--fg);
-}
-
-.badge {
-  background: rgba(217,119,6,.15);
-  border: 1px solid rgba(217,119,6,.3);
-  color: var(--accent);
-  padding: .15rem .45rem;
-  border-radius: 6px;
-  font-family: monospace;
-  font-size: 0.9em;
-  white-space: nowrap;
-}
-
-/* SVG Line Drawing */
-.doodle-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin: 2.5rem 0;
-  transition: transform .3s ease;
-}
-
-.doodle-box:hover {
-  transform: scale(1.015);
-}
-
-svg.draw {
-  width: 100%;
-  max-width: 680px;
-  display: block;
-  margin: 1rem auto;
-  color: var(--fg);
-}
-
-.draw path, .draw line, .draw circle, .draw rect, .draw polyline, .draw polygon {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-}
-
-.draw.animate path, .draw.animate line, .draw.animate circle, .draw.animate rect, .draw.animate polyline, .draw.animate polygon {
-  animation: draw 1.8s ease forwards;
-}
-
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-
-/* Water-Jelly Drift Stage */
-.drift-stage {
-  position: relative;
-  width: 100%;
-  height: 360px;
-  background: var(--stage-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 2.5rem 0;
-  transition: transform .3s ease;
-}
-
-.drift-stage:hover {
-  transform: scale(1.015);
-}
-
-.connecting-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.net-line {
-  stroke: var(--muted);
-  stroke-opacity: 0.4;
-  stroke-width: 1.5;
-  stroke-dasharray: 4 4;
-}
-
-.center-label {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--accent);
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.35rem;
-  text-align: center;
-  z-index: 10;
-  pointer-events: none;
-  background: var(--card);
-  padding: .5rem 1.2rem;
-  border-radius: 30px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  line-height: 1.3;
-}
-
-.drift-card {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  border-radius: 12px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  will-change: transform;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-}
-
-.drift-card svg {
-  width: 100%;
-  height: 100%;
-  stroke: var(--fg);
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-footer {
-  text-align: center;
-  color: var(--muted);
-  padding: 5rem 0 3rem 0;
-  border-top: 1px solid var(--border);
-  margin-top: 5rem;
-  font-size: 0.95rem;
-}
-
-footer p { color: var(--muted); margin-bottom: 0.5rem; }
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-word, section, .draw path, .draw line, .draw circle, .draw rect, .draw polyline {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    stroke-dashoffset: 0 !important;
-  }
-}
-
-@media (max-width: 640px) {
-  nav { padding: 14px 1.25rem; }
-  main { padding: 3rem 1.25rem; }
-  h1, .hero-title { font-size: 2.5rem; }
-  .drift-stage { height: 380px; }
-  .drift-card { width: 68px; height: 68px; padding: 8px; }
-  .center-label { font-size: 1.1rem; padding: 0.4rem 0.8rem; }
-}
-</style>
-</head>
-<body>
-
-<div id="progress"></div>
-
-<nav>
-  <a href="#" class="nav-logo">TheRoguePrince</a>
-  <div class="nav-links">
-    <a href="#">Blog</a>
-    <button id="theme" aria-label="Toggle dark/light mode">🌙</button>
-  </div>
-</nav>
-
-<main>
-  <!-- Hero Section -->
-  <div class="hero">
-    <p class="tagline">Blog · 8 min read</p>
-    <h1 id="animated-title" class="hero-title">
-      AI Didn't Replace My Cybersecurity Skills - It Changed How I Use Them
-    </h1>
-    <p class="subtitle">
-      Exploring AI-assisted penetration testing using Gemini, Claude, MCP and FastMCP.
-    </p>
-    <div class="meta">By <strong>TheRoguePrince</strong> · August 2026</div>
-  </div>
-
-  <!-- Section 1 -->
-  <section class="reveal">
-    <h2>The Shift</h2>
-    <p>
-      Lately, I’ve noticed a shift during CTF challenges: more people are turning to AI assistants to churn through problems faster. That naturally sparked a question in my mind - if these models can automate so much of our work, where does that leave us as cybersecurity professionals?
-    </p>
-    <p>
-      Rather than speculate from the sidelines, I decided to test it myself.
-    </p>
-
-    <!-- Water-Jelly Drift Stage with Inline Line-Art SVGs -->
-    <div class="drift-stage" id="stage" aria-label="Interactive concept network visualization">
-      <svg class="connecting-svg">
-        <line class="net-line" />
-        <line class="net-line" />
-        <line class="net-line" />
-        <line class="net-line" />
-      </svg>
-
-      <div class="center-label" id="hub-text">What is AI's impact<br>on cybersecurity?</div>
-
-      <div class="drift-card" style="left: 12%; top: 15%;" aria-label="Recon target icon">
-        <svg viewBox="0 0 60 60">
-          <circle cx="30" cy="30" r="22"/>
-          <circle cx="30" cy="30" r="12"/>
-          <line x1="30" y1="4" x2="30" y2="56"/>
-          <line x1="4" y1="30" x2="56" y2="30"/>
-        </svg>
-      </div>
-
-      <div class="drift-card" style="left: 72%; top: 12%;" aria-label="Neural network model icon">
-        <svg viewBox="0 0 60 60">
-          <circle cx="18" cy="30" r="6"/>
-          <circle cx="42" cy="18" r="6"/>
-          <circle cx="42" cy="42" r="6"/>
-          <line x1="24" y1="28" x2="36" y2="20"/>
-          <line x1="24" y1="32" x2="36" y2="40"/>
-        </svg>
-      </div>
-
-      <div class="drift-card" style="left: 15%; top: 62%;" aria-label="Terminal prompt icon">
-        <svg viewBox="0 0 60 60">
-          <rect x="8" y="12" width="44" height="36" rx="6"/>
-          <path d="M 18,24 L 26,30 L 18,36"/>
-          <line x1="30" y1="36" x2="40" y2="36"/>
-        </svg>
-      </div>
-
-      <div class="drift-card" style="left: 74%; top: 60%;" aria-label="Shield security icon">
-        <svg viewBox="0 0 60 60">
-          <path d="M 30,8 L 48,16 C 48,36 30,50 30,50 C 30,50 12,36 12,16 Z"/>
-          <polyline points="24,28 28,34 36,22"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 2 -->
-  <section class="reveal">
-    <h2>My First AI Experiment</h2>
-    <p>
-      My first attempt was a lightweight project using the Gemini API from Google AI Studio. The concept was simple: feed the AI an IP address and let it determine which reconnaissance tools to run. Watching it work for the first time was genuinely exciting. It could reason about a target and suggest a sensible sequence of tools with minimal nudging.
-    </p>
-    <p>
-      That initial high didn't last long, though. Rate limits quickly choked the workflow, making the setup impractical for any real, continuous reconnaissance. It became obvious that if I wanted a practical AI assistant, I needed a far more robust setup.
-    </p>
-
-    <div class="doodle-box">
-      <svg class="draw" viewBox="0 0 520 180" aria-label="Gemini API rate limit bottleneck diagram">
-        <!-- Input IP -->
-        <rect x="30" y="60" width="90" height="60" rx="6"/>
-        <line x1="45" y1="85" x2="105" y2="85"/>
-        <line x1="45" y1="95" x2="85" y2="95"/>
-
-        <!-- Flow Line -->
-        <line x1="120" y1="90" x2="180" y2="90"/>
-        <polyline points="170,83 180,90 170,97"/>
-
-        <!-- API Engine -->
-        <rect x="180" y="60" width="90" height="60" rx="6"/>
-        <circle cx="225" cy="90" r="14"/>
-
-        <!-- Bottleneck Barrier -->
-        <line x1="300" y1="45" x2="300" y2="135"/>
-        <circle cx="300" cy="90" r="18"/>
-        <line x1="288" y1="78" x2="312" y2="102"/>
-
-        <!-- Interrupted Flow -->
-        <line x1="318" y1="90" x2="380" y2="90"/>
-        <rect x="380" y="65" width="80" height="50" rx="6"/>
-      </svg>
-    </div>
-  </section>
-
-  <!-- Section 3 -->
-  <section class="reveal">
-    <h2>Discovering MCP</h2>
-    <p>
-      The real breakthrough came when I stumbled onto the Model Context Protocol (MCP).
-    </p>
-    <p>
-      MCP offers a clean, standardized way for AI models to talk to external tools and execution environments. I built an MCP proxy on my Windows host and spun up a FastMCP server inside a Kali Linux VM to execute the actual security operations. To keep everything contained, I locked the setup down behind a host-only network so traffic never left my local machine.
-    </p>
-    <p>
-      The mechanics were simple: Claude Desktop talked to the proxy, which routed requests to the FastMCP server in Kali. I also plugged in an MCP Inspector as a diagnostic layer, giving me complete visibility to monitor and troubleshoot every message passing through the pipeline.
-    </p>
-    <p>
-      What made this architecture truly valuable was that the AI was no longer running wild as an unrestricted assistant. Instead, it was bound to a strict penetration testing methodology I designed. Every assessment had to start with broad network discovery before advancing to targeted enumeration. This stopped the AI from skipping foundational steps or chasing useless rabbit holes. The result was an automated partner that stayed disciplined, consistent, and completely aligned with proper security practices.
-    </p>
-
-    <div class="wide-container">
-      <div class="doodle-box">
-        <svg class="draw" viewBox="0 0 700 200" aria-label="MCP Architecture diagram">
-          <!-- Claude Desktop -->
-          <rect x="20" y="60" width="110" height="70" rx="8"/>
-          <line x1="40" y1="85" x2="110" y2="85"/>
-          <line x1="40" y1="105" x2="90" y2="105"/>
-
-          <!-- Arrow 1 -->
-          <line x1="130" y1="95" x2="180" y2="95"/>
-          <polyline points="170,88 180,95 170,102"/>
-
-          <!-- MCP Proxy -->
-          <rect x="180" y="60" width="110" height="70" rx="8"/>
-          <circle cx="235" cy="95" r="16"/>
-
-          <!-- Connector to Inspector (Top) -->
-          <line x1="235" y1="60" x2="235" y2="35"/>
-          <polyline points="228,45 235,35 242,45"/>
-          <rect x="180" y="5" width="110" height="30" rx="4"/>
-
-          <!-- Arrow 2 -->
-          <line x1="290" y1="95" x2="340" y2="95"/>
-          <polyline points="330,88 340,95 330,102"/>
-
-          <!-- FastMCP -->
-          <rect x="340" y="60" width="110" height="70" rx="8"/>
-          <polygon points="395,75 410,105 380,105"/>
-
-          <!-- Arrow 3 -->
-          <line x1="450" y1="95" x2="500" y2="95"/>
-          <polyline points="490,88 500,95 490,102"/>
-
-          <!-- Kali VM Outer Shield -->
-          <rect x="500" y="40" width="180" height="110" rx="10"/>
-          <rect x="520" y="60" width="140" height="70" rx="6"/>
-          <path d="M 535,80 L 555,95 L 535,110 M 565,110 L 585,110"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4 -->
-  <section class="reveal">
-    <h2>Keeping Humans in Control</h2>
-    <p>
-      Yet, despite all that automation power, one thing became crystal clear: human judgment is still the most critical part of the equation.
-    </p>
-    <p>
-      Next, I'm building a custom interface that acts as a true safety net - letting me review, tweak, approve, or outright veto any AI-suggested command before it touches a network. I’m also looking into parallel execution so we can run multiple tools at once without losing an ounce of control.
-    </p>
-
-    <div class="doodle-box">
-      <svg class="draw" viewBox="0 0 520 180" aria-label="Human-in-the-loop oversight diagram">
-        <!-- Input Stream -->
-        <line x1="40" y1="90" x2="170" y2="90"/>
-        <polyline points="160,83 170,90 160,97"/>
-
-        <!-- Safety Shield Gate -->
-        <polygon points="210,50 290,50 310,90 290,130 210,130 190,90"/>
-        <polyline points="235,90 248,103 275,75"/>
-
-        <!-- Approved Execution Line -->
-        <line x1="310" y1="90" x2="440" y2="90"/>
-        <polyline points="430,83 440,90 430,97"/>
-
-        <!-- Human Inspector Icon -->
-        <circle cx="250" cy="20" r="8"/>
-        <line x1="250" y1="28" x2="250" y2="50"/>
-      </svg>
-    </div>
-  </section>
-
-  <!-- Section 5 -->
-  <section class="reveal">
-    <h2>Final Thoughts</h2>
-    <p>
-      At the end of the day, AI is great at execution, but it doesn't do strategy. That responsibility still sits squarely on our shoulders.
-    </p>
-    <p>
-      For anyone worried about AI taking over cybersecurity roles, the real question isn't whether we'll be replaced, but how quickly we can adapt. Understanding how these systems work under the hood, recognizing their limits, and weaving them into our day-to-day workflow won't make us obsolete - it'll just make us far more effective.
-    </p>
-    <p>
-      AI is an incredibly powerful partner. But the strategy, critical thinking, and ultimate decision-making? That still belongs to the human behind the keyboard.
-    </p>
-
-    <div class="doodle-box">
-      <svg class="draw" viewBox="0 0 520 180" aria-label="Strategic trajectory diagram">
-        <!-- Flagpost -->
-        <path d="M 150,140 L 150,40 L 230,65 L 150,90"/>
-        <line x1="130" y1="140" x2="170" y2="140"/>
-
-        <!-- Curved Trajectory -->
-        <path d="M 80,140 Q 150,140 250,90 T 420,40"/>
-        <circle cx="420" cy="40" r="10"/>
-        <circle cx="420" cy="40" r="4"/>
-      </svg>
-    </div>
-  </section>
-
-  <footer>
-    <p>Written by TheRoguePrince</p>
-    <p>Built with HTML • CSS • JavaScript</p>
-    <p>© 2026 TheRoguePrince</p>
-  </footer>
-</main>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  // 1. Reading Progress Bar
-  const progress = document.getElementById("progress");
-  window.addEventListener("scroll", () => {
-    const h = document.documentElement;
-    progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
-  });
-
-  // 2. Theme Toggle with LocalStorage
-  const btn = document.getElementById("theme");
-  const applyTheme = (isDark) => {
-    if (isDark) {
-      document.body.classList.add("dark");
-      btn.textContent = "☀️";
-    } else {
-      document.body.classList.remove("dark");
-      btn.textContent = "🌙";
-    }
-  };
-
-  if (localStorage.theme === "dark" || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    applyTheme(true);
-  } else {
-    applyTheme(false);
-  }
-
-  btn.onclick = () => {
-    const isDark = document.body.classList.toggle("dark");
-    localStorage.theme = isDark ? "dark" : "light";
-    btn.textContent = isDark ? "☀️" : "🌙";
-  };
-
-  // 3. Hero Word-by-Word Title Stagger Animation (with Explicit Space Nodes to avoid mashed words)
-  const heroTitle = document.getElementById('animated-title');
-  if (heroTitle) {
-    const text = heroTitle.innerText.trim();
-    const words = text.split(/\s+/);
-    heroTitle.innerHTML = '';
-    words.forEach((word, index) => {
-      const span = document.createElement('span');
-      span.classList.add('hero-word');
-      span.textContent = word;
-      span.style.animationDelay = `${index * 40}ms`;
-      heroTitle.appendChild(span);
-      
-      // Explicit space node guarantees word gaps are rendered across browsers
-      heroTitle.appendChild(document.createTextNode(' '));
-    });
-  }
-
-  // 4. Keyword Auto-Badging (Gemini, Claude, MCP, FastMCP, Kali)
-  const targetKeywords = ['Gemini', 'Claude', 'MCP', 'FastMCP', 'Kali'];
-  const paragraphs = document.querySelectorAll('p');
-  paragraphs.forEach(p => {
-    let html = p.innerHTML;
-    targetKeywords.forEach(keyword => {
-      const regex = new RegExp(`\\b(${keyword})\\b`, 'g');
-      html = html.replace(regex, `<span class="badge">$1</span>`);
-    });
-    p.innerHTML = html;
-  });
-
-  // 5. Scroll Intersection Observer for Sections & Drawing SVGs
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add("show");
-        const svg = e.target.querySelector(".draw");
-        if (svg) svg.classList.add("animate");
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll("section").forEach(s => io.observe(s));
-
-  // 6. Water-Jelly Drift Animation Engine
-  const cards = document.querySelectorAll('.drift-card');
-  const hubText = document.getElementById('hub-text');
-  const lines = document.querySelectorAll('.net-line');
-
-  if (cards.length > 0 && hubText) {
-    const nodes = Array.from(cards).map((card, index) => {
-      const rect = card.getBoundingClientRect();
-      const parentRect = card.parentElement.getBoundingClientRect();
-      return {
-        el: card,
-        lineEl: lines[index],
-        baseX: rect.left - parentRect.left + rect.width / 2,
-        baseY: rect.top - parentRect.top + rect.height / 2,
-        index: index
-      };
-    });
-
-    let time = 0;
-    const driftAmount = 10.0;
-
-    function animateWaterDrift() {
-      time += 16;
-      const hubRect = hubText.getBoundingClientRect();
-      const parentRect = hubText.parentElement.getBoundingClientRect();
-      const hubX = hubRect.left - parentRect.left + hubRect.width / 2;
-      const hubY = hubRect.top - parentRect.top + hubRect.height / 2;
-
-      nodes.forEach((node) => {
-        const i = node.index;
-        const freqX = 0.00045 + 0.00008 * (i % 5);
-        const freqY = 0.00038 + 0.00007 * ((i + 2) % 6);
-        const phase = i * 2.399;
-
-        const offsetX = driftAmount * Math.sin(time * freqX + phase);
-        const offsetY = driftAmount * Math.sin(time * freqY + phase * 1.7);
-
-        node.el.style.transform = `translate(${offsetX.toFixed(2)}px, ${offsetY.toFixed(2)}px)`;
-
-        if (node.lineEl) {
-          node.lineEl.setAttribute('x1', hubX);
-          node.lineEl.setAttribute('y1', hubY);
-          node.lineEl.setAttribute('x2', node.baseX + offsetX);
-          node.lineEl.setAttribute('y2', node.baseY + offsetY);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheRoguePrince | Offensive Security & AI Security Portfolio</title>
+  <meta name="description" content="Portfolio and writeup blog of TheRoguePrince. HackTheBox Certified Penetration Testing Specialist (CPTS), 3-Year HTB Prodigy Rank, focusing on AI Security and Python." />
+
+  <!-- Google Fonts: Inter (UI & Prose) + JetBrains Mono (Code & Metadata) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            amoled: {
+              bg: '#000000',
+              surface: '#08080a',
+              elevated: '#0d0d10',
+              hover: '#131318',
+              border: '#18181b',
+              borderLight: '#27272a',
+            }
+          }
         }
+      }
+    }
+  </script>
+
+  <style id="custom-amoled-styles">
+    /* True AMOLED Black (#000000) Executive Aesthetic */
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background-color: #000000;
+      color: #fafafa;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Subtle top radial ambient light */
+    .oled-spotlight {
+      background: radial-gradient(70% 38% at 50% 0%, rgba(255, 255, 255, 0.035) 0%, rgba(16, 185, 129, 0.015) 45%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    /* Minimal custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+
+    /* Prose & Markdown Reader Styling inside Inline Expandable Reader */
+    .article-prose h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #18181b;
+      letter-spacing: -0.02em;
+    }
+    .article-prose h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #e4e4e7;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .article-prose p {
+      color: #a1a1aa;
+      line-height: 1.75;
+      margin-bottom: 1.1rem;
+      font-size: 0.95rem;
+    }
+    .article-prose ul {
+      list-style-type: disc;
+      padding-left: 1.4rem;
+      margin-bottom: 1.25rem;
+      color: #a1a1aa;
+      font-size: 0.95rem;
+    }
+    .article-prose li {
+      margin-bottom: 0.45rem;
+      line-height: 1.65;
+    }
+    .article-prose strong {
+      color: #f4f4f5;
+      font-weight: 600;
+    }
+    .article-prose code:not(pre code) {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      background-color: #101014;
+      color: #e4e4e7;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.3rem;
+      border: 1px solid #27272a;
+    }
+    .article-prose blockquote {
+      border-left: 2px solid #10b981;
+      background-color: #070a09;
+      padding: 0.85rem 1.1rem;
+      margin: 1.25rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+      color: #d4d4d8;
+      font-size: 0.9rem;
+    }
+    .article-prose a {
+      color: #34d399;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body class="bg-black text-zinc-100 selection:bg-emerald-500/20 selection:text-emerald-300 min-h-screen flex flex-col">
+
+  <!-- ==========================================================================
+       SUBTLE TOP AMBIENT LIGHT
+  =========================================================================== -->
+  <div class="fixed inset-0 pointer-events-none oled-spotlight z-0"></div>
+
+  <!-- ==========================================================================
+       STICKY NAVIGATION BAR
+  =========================================================================== -->
+  <header class="sticky top-0 z-40 bg-black/85 backdrop-blur-md border-b border-amoled-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <!-- Brand / Identity -->
+      <a href="#" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-8 h-8 rounded-lg bg-amoled-elevated border border-amoled-border group-hover:border-zinc-600 flex items-center justify-center transition-colors">
+          <span class="font-mono text-xs font-semibold tracking-tighter text-white">RP</span>
+        </div>
+        <div class="flex flex-col">
+          <span id="nav-author-name" class="text-sm font-semibold tracking-tight text-white group-hover:text-zinc-200 transition-colors">TheRoguePrince</span>
+          <span class="text-[11px] font-mono text-zinc-500 hidden sm:inline">HTB CPTS · Prodigy Rank</span>
+        </div>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-medium text-zinc-400">
+        <a href="#experience" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-amoled-elevated transition-colors">Experience &amp; Profile</a>
+        <a href="#certifications" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-amoled-elevated transition-colors">Certifications</a>
+        <a href="#skills" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-amoled-elevated transition-colors">Skills</a>
+        <a href="#writeups" class="px-3 py-1.5 rounded-md hover:text-white hover:bg-amoled-elevated transition-colors">Writeups</a>
+      </nav>
+
+      <!-- Right Verified Profile Icons -->
+      <div class="flex items-center gap-1.5">
+        <!-- HackTheBox Profile Link -->
+        <a id="nav-htb" href="https://profile.hackthebox.com/profile/019c5aa6-b8c6-7060-8c85-8a674387efaf" target="_blank" rel="noopener noreferrer" title="HackTheBox Profile (Prodigy Rank)"
+           class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-amoled-elevated border border-transparent hover:border-amoled-border transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline stroke-linecap="round" stroke-linejoin="round" points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line stroke-linecap="round" stroke-linejoin="round" x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </a>
+
+        <!-- GitHub Link (Automatically shown when githubUrl is added in PORTFOLIO_DATA) -->
+        <a id="nav-github" href="#" target="_blank" rel="noopener noreferrer" title="GitHub"
+           class="hidden p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-amoled-elevated border border-transparent hover:border-amoled-border transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn Link -->
+        <a id="nav-linkedin" href="https://www.linkedin.com/in/abhishek-r-13bb7834b/" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile"
+           class="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-amoled-elevated border border-transparent hover:border-amoled-border transition-all">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+  =========================================================================== -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-12 pb-24 flex-1 w-full">
+
+    <!-- ========================================================================
+         1. HERO / INTRO SECTION (Strictly CPTS, 3-Year HTB Prodigy, AI Sec & Python)
+    ========================================================================= -->
+    <section id="overview" class="pb-14 border-b border-amoled-border">
+      <!-- Current Focus Pill -->
+      <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-amoled-surface border border-amoled-border mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span id="hero-status" class="font-mono text-[11px] text-zinc-300 tracking-wide">
+          HTB CPTS Certified · 3 Years on HackTheBox (Prodigy Rank) · AI Security Focus
+        </span>
+      </div>
+
+      <!-- Handle & Headline -->
+      <div class="font-mono text-xs uppercase tracking-widest text-emerald-400 mb-2" id="hero-name-kicker">TheRoguePrince</div>
+      <h1 id="hero-title" class="text-3xl sm:text-5xl font-semibold tracking-tight text-white leading-[1.15] max-w-3xl">
+        Offensive Security Practitioner &amp; AI Security Learner.
+      </h1>
+
+      <!-- Intro Bio (CPTS & HTB Prodigy highlighted; no CAPT in intro) -->
+      <p id="hero-bio" class="mt-5 text-zinc-400 text-base sm:text-lg leading-relaxed max-w-3xl font-normal">
+        HackTheBox Certified Penetration Testing Specialist (<span class="text-zinc-100 font-mono text-sm">HTB CPTS</span>) with a 3-year <span class="text-zinc-100 font-medium">HackTheBox</span> profile at <span class="text-zinc-100 font-mono text-sm">Prodigy Rank</span>. Currently focused on learning <span class="text-zinc-100 font-medium">AI Security</span> as a beginner, researching <span class="text-zinc-100 font-medium">Model Context Protocol (MCP)</span> security concepts, and using <span class="text-zinc-100 font-mono text-sm">Python</span> as my primary programming language.
+      </p>
+
+      <!-- Direct Hero Action Buttons -->
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a id="hero-cpts-btn" href="https://academy.hackthebox.com/achievement/badge/be58fbac-ce62-11f1-9524-0affe7dfeb45" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-2.5 rounded-lg bg-white text-black font-medium text-xs sm:text-sm hover:bg-zinc-200 transition-colors inline-flex items-center gap-2">
+          <span class="text-emerald-600 font-bold">✓</span>
+          <span>Verified CPTS Badge ↗</span>
+        </a>
+
+        <a id="hero-htb-btn" href="https://profile.hackthebox.com/profile/019c5aa6-b8c6-7060-8c85-8a674387efaf" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-2.5 rounded-lg bg-amoled-surface hover:bg-amoled-elevated text-zinc-200 border border-amoled-border hover:border-amoled-borderLight font-mono text-xs transition-all inline-flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>HackTheBox Profile (Prodigy) ↗</span>
+        </a>
+
+        <a id="hero-linkedin-btn" href="https://www.linkedin.com/in/abhishek-r-13bb7834b/" target="_blank" rel="noopener noreferrer"
+           class="px-4 py-2.5 rounded-lg bg-amoled-surface hover:bg-amoled-elevated text-zinc-300 border border-amoled-border hover:border-amoled-borderLight font-mono text-xs transition-all inline-flex items-center gap-2">
+          <span>LinkedIn ↗</span>
+        </a>
+
+        <!-- GitHub Hero Button (Automatically shown if githubUrl is populated in PORTFOLIO_DATA) -->
+        <a id="hero-github-btn" href="#" target="_blank" rel="noopener noreferrer"
+           class="hidden px-4 py-2.5 rounded-lg bg-amoled-surface hover:bg-amoled-elevated text-zinc-300 border border-amoled-border hover:border-amoled-borderLight font-mono text-xs transition-all items-center gap-2">
+          <span>GitHub ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         2. EXPERIENCE & PROFILE SECTION
+    ========================================================================= -->
+    <section id="experience" class="pt-14 pb-14 border-b border-amoled-border">
+      <div class="mb-8">
+        <div class="flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-wider mb-1">
+          <span>// 01</span>
+          <span>Experience &amp; Profile</span>
+        </div>
+        <h2 class="text-2xl font-semibold tracking-tight text-white">Practitioner Profile &amp; Current Focus</h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          Offensive security background on HackTheBox and current learning trajectory in AI Security and Python.
+        </p>
+      </div>
+
+      <div id="experience-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Populated dynamically from PORTFOLIO_DATA.experience -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. CERTIFICATIONS SECTION (CPTS & CAPT)
+    ========================================================================= -->
+    <section id="certifications" class="pt-14 pb-14 border-b border-amoled-border">
+      <div class="mb-8">
+        <div class="flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-wider mb-1">
+          <span>// 02</span>
+          <span>Credentials</span>
+        </div>
+        <h2 class="text-2xl font-semibold tracking-tight text-white">Certifications</h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          Offensive security certifications held.
+        </p>
+      </div>
+
+      <div id="certs-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Populated dynamically from PORTFOLIO_DATA.certifications -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. SKILLS SECTION
+    ========================================================================= -->
+    <section id="skills" class="pt-14 pb-14 border-b border-amoled-border">
+      <div class="mb-8">
+        <div class="flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-wider mb-1">
+          <span>// 03</span>
+          <span>Capabilities &amp; Learning Track</span>
+        </div>
+        <h2 class="text-2xl font-semibold tracking-tight text-white">Skills</h2>
+        <p class="text-sm text-zinc-400 mt-1">
+          Core offensive security capabilities, AI security learning focus, and programming language.
+        </p>
+      </div>
+
+      <div id="skills-container" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Populated dynamically from PORTFOLIO_DATA.skills -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. WRITEUPS & RESEARCH ARTICLES (Inline Reader Ready)
+    ========================================================================= -->
+    <section id="writeups" class="pt-14">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-wider mb-1">
+            <span>// 04</span>
+            <span>Writeups &amp; Research</span>
+          </div>
+          <h2 class="text-2xl font-semibold tracking-tight text-white">Research Writeups &amp; AI Security</h2>
+          <p class="text-sm text-zinc-400 mt-1">
+            A hands-on article exploring AI-assisted penetration testing, MCP, and controlled tool execution.
+          </p>
+        </div>
+
+        <!-- Search Input (Shown automatically once writeups are added to PORTFOLIO_DATA.writeups) -->
+        <div id="writeup-controls" class="hidden items-center gap-2 w-full md:w-auto">
+          <div class="relative flex-1 md:w-64">
+            <svg class="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"/>
+            </svg>
+            <input id="writeup-search" type="text" placeholder="Search writeups, MCP..."
+                   oninput="handleSearchWriteups(this.value)"
+                   class="w-full bg-amoled-surface border border-amoled-border focus:border-zinc-500 rounded-lg pl-9 pr-3 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none font-mono transition-colors" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs (Shown automatically once writeups are added) -->
+      <div id="writeup-tabs-bar" class="hidden flex-wrap items-center justify-between gap-3 mb-6">
+        <div id="writeup-tabs" class="flex flex-wrap items-center gap-1.5"></div>
+        <div class="text-xs font-mono text-zinc-500" id="writeup-count-label"></div>
+      </div>
+
+      <!-- Writeups List + Inline Expandable Reader Container -->
+      <div id="writeups-container" class="space-y-3">
+        <!-- Populated dynamically from PORTFOLIO_DATA.writeups -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         OPTIONAL PROJECTS SECTION (Hidden automatically unless items are added in code)
+    ========================================================================= -->
+    <section id="projects-section" class="hidden pt-14 mt-14 border-t border-amoled-border">
+      <div class="mb-8">
+        <div class="flex items-center gap-2 font-mono text-xs text-emerald-400 uppercase tracking-wider mb-1">
+          <span>// 05</span>
+          <span>Projects &amp; Notes</span>
+        </div>
+        <h2 class="text-2xl font-semibold tracking-tight text-white">Projects &amp; Draft Notes</h2>
+      </div>
+      <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+  =========================================================================== -->
+  <footer class="border-t border-amoled-border bg-black py-10 px-4 sm:px-6 mt-auto">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-xs text-zinc-500">
+      <div class="space-y-1">
+        <div class="font-mono text-zinc-300 font-medium" id="footer-name">TheRoguePrince</div>
+        <p>Offensive Security &amp; AI Security Portfolio</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-5 font-mono">
+        <a id="footer-cpts" href="https://academy.hackthebox.com/achievement/badge/be58fbac-ce62-11f1-9524-0affe7dfeb45" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-200 transition-colors">Verified CPTS Badge ↗</a>
+        <a id="footer-htb" href="https://profile.hackthebox.com/profile/019c5aa6-b8c6-7060-8c85-8a674387efaf" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-200 transition-colors">HackTheBox ↗</a>
+        <a id="footer-github" href="#" target="_blank" rel="noopener noreferrer" class="hidden hover:text-zinc-200 transition-colors">GitHub ↗</a>
+        <a id="footer-linkedin" href="https://www.linkedin.com/in/abhishek-r-13bb7834b/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-200 transition-colors">LinkedIn ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       PORTFOLIO DATA CONFIGURATION (Edit directly in code to update site)
+  =========================================================================== -->
+  <script id="portfolio-data-script">
+    const PORTFOLIO_DATA = {
+      profile: {
+        name: "TheRoguePrince",
+        status: "HTB CPTS Certified · 3 Years on HackTheBox (Prodigy Rank) · AI Security Focus",
+        headline: "Offensive Security Practitioner & AI Security Learner.",
+        links: {
+          cptsBadge: "https://academy.hackthebox.com/achievement/badge/be58fbac-ce62-11f1-9524-0affe7dfeb45",
+          hackthebox: "https://profile.hackthebox.com/profile/019c5aa6-b8c6-7060-8c85-8a674387efaf",
+          linkedin: "https://www.linkedin.com/in/abhishek-r-13bb7834b/",
+          githubUrl: "https://github.com/TheRogue-Prince"
+        }
+      },
+
+      // ========================================================================
+      // 1. EXPERIENCE & PROFILE
+      // ========================================================================
+      experience: [
+        {
+          tag: "3 YEARS · PRODIGY RANK",
+          title: "HackTheBox Practitioner",
+          subtitle: "Offensive Security & Lab Progression",
+          description: "3-year active HackTheBox profile holding Prodigy Rank, practicing hands-on offensive security across enterprise-style networks, Active Directory, web/network exploitation, and privilege escalation.",
+          linkUrl: "https://profile.hackthebox.com/profile/019c5aa6-b8c6-7060-8c85-8a674387efaf",
+          linkLabel: "View HackTheBox Profile ↗"
+        },
+        {
+          tag: "CURRENT FOCUS · BEGINNER",
+          title: "AI Security Research",
+          subtitle: "LLMs & Model Context Protocol (MCP)",
+          description: "Currently focusing on AI Security from the ground up, exploring the security implications of AI systems, LLM vulnerabilities, and Model Context Protocol (MCP) security concepts.",
+          linkUrl: "",
+          linkLabel: ""
+        },
+        {
+          tag: "CORE LANGUAGE",
+          title: "Python",
+          subtitle: "Scripting & Security Automation",
+          description: "Learning and using Python as my sole programming language for offensive security scripting, automation, and AI security experimentation.",
+          linkUrl: "",
+          linkLabel: ""
+        }
+      ],
+
+      // ========================================================================
+      // 2. CERTIFICATIONS (CPTS & CAPT)
+      // ========================================================================
+      certifications: [
+        {
+          code: "HTB CPTS",
+          title: "Certified Penetration Testing Specialist (CPTS)",
+          issuer: "HackTheBox",
+          status: "Verified",
+          verifyUrl: "https://academy.hackthebox.com/achievement/badge/be58fbac-ce62-11f1-9524-0affe7dfeb45",
+          description: "Practical offensive security certification demonstrating end-to-end penetration testing across enterprise networks, Active Directory, web applications, and privilege escalation.",
+          highlights: [
+            "Verified HackTheBox Achievement Badge",
+            "Enterprise Network & Active Directory Penetration Testing"
+          ]
+        },
+        {
+          code: "CAPT",
+          title: "Certified Associate Penetration Tester (CAPT)",
+          issuer: "Hackviser",
+          status: "Certified",
+          verifyUrl: "", // Paste your Hackviser CAPT verification link here later if desired
+          description: "Offensive security certification by Hackviser validating core penetration testing methodology and practical exploitation skills.",
+          highlights: [
+            "Hackviser Certified Associate Penetration Tester",
+            "Offensive Security & Exploitation Fundamentals"
+          ]
+        }
+      ],
+
+      // ========================================================================
+      // 3. SKILLS
+      // ========================================================================
+      skills: [
+        {
+          category: "Offensive Security",
+          subtitle: "HTB CPTS · 3-Year Prodigy Rank",
+          items: [
+            "Penetration Testing (HTB CPTS)",
+            "HackTheBox Labs (Prodigy Rank · 3 Years)",
+            "Network & Web Exploitation",
+            "Privilege Escalation"
+          ]
+        },
+        {
+          category: "AI Security (Beginner Focus)",
+          subtitle: "Current Learning Track",
+          items: [
+            "AI / LLM Security Fundamentals",
+            "Model Context Protocol (MCP) Research"
+          ]
+        },
+        {
+          category: "Programming",
+          subtitle: "Primary & Sole Language",
+          items: [
+            "Python (Scripting & Automation, Learning)"
+          ]
+        }
+      ],
+
+      // ========================================================================
+      // 4. WRITEUPS & ARTICLES (Add items to this array in code when ready)
+      // Clicking any writeup card expands the full Markdown writeup inline.
+      //
+      // Example template to copy/uncomment when you publish a writeup or MCP article:
+      // {
+      //   id: "mcp-security-overview",
+      //   title: "Understanding Model Context Protocol (MCP) Security",
+      //   category: "AI Security & MCP", // "HTB Writeups" | "AI Security & MCP" | "Notes"
+      //   date: "2026",
+      //   readTime: "5 min read",
+      //   badge: "MCP Research",
+      //   tags: ["MCP", "AI Security", "Python"],
+      //   externalUrl: "", // Optional: "https://..." if also hosted externally
+      //   externalLabel: "Open External Article ↗",
+      //   summary: "Short summary displayed on the card before expanding...",
+      //   content: `## Overview
+      // Write your full walkthrough or article here using Markdown.
+      //
+      // ### Enumeration / Code Example
+      // \`\`\`python
+      // print("Hello from TheRoguePrince")
+      // \`\`\``
+      // }
+      // ========================================================================
+      writeups: [
+        {
+          id: "ai-assisted-pentesting-gemini-claude-mcp-fastmcp",
+          title: "Exploring AI-Assisted Penetration Testing with Gemini, Claude, MCP and FastMCP",
+          category: "AI Security & MCP",
+          date: "August 2026",
+          readTime: "8 min read",
+          badge: "///\\",
+          tags: ["AI Security", "Gemini", "Claude", "MCP", "FastMCP", "Kali Linux"],
+          summary: "A hands-on experiment in using AI assistants for reconnaissance and security tooling, moving from a lightweight Gemini prototype to a controlled MCP and FastMCP setup.",
+          content: `## The Shift
+
+Lately, I’ve noticed a shift during CTF challenges: more people are turning to AI assistants to churn through problems faster. That naturally sparked a question in my mind: if these models can automate so much of our work, where does that leave us as cybersecurity professionals?
+
+Rather than speculate from the sidelines, I decided to test it myself.
+
+### What is AI’s impact on cybersecurity?
+
+The experiment explored one practical question: how can AI help coordinate security tools while the operator keeps control of the process?
+
+\`\`\`text
+AI assistant
+     |
+     v
+Tool suggestions and analysis
+     |
+     v
+Human review and direction
+\`\`\`
+
+## My First AI Experiment
+
+My first attempt was a lightweight project using the Gemini API from Google AI Studio. The concept was simple: feed the AI an IP address and let it determine which reconnaissance tools to run. Watching it work for the first time was genuinely exciting. It could reason about a target and suggest a sensible sequence of tools with minimal nudging.
+
+That initial high didn’t last long, though. Rate limits quickly choked the workflow, making the setup impractical for any real, continuous reconnaissance. It became obvious that if I wanted a practical AI assistant, I needed a far more robust setup.
+
+### Gemini API rate-limit bottleneck
+
+\`\`\`text
+Target IP
+    |
+    v
+Gemini API
+    |
+    v
+Suggested reconnaissance tools
+    |
+    v
+Rate limit reached  -->  Workflow stalls
+\`\`\`
+
+## Discovering MCP
+
+The real breakthrough came when I stumbled onto the Model Context Protocol (MCP).
+
+MCP offers a clean, standardized way for AI models to talk to external tools and execution environments. I built an MCP proxy on my Windows host and spun up a FastMCP server inside a Kali Linux VM to execute the actual security operations. To keep everything contained, I locked the setup down behind a host-only network so traffic never left my local machine.
+
+The mechanics were simple: Claude Desktop talked to the proxy, which routed requests to the FastMCP server in Kali. I also plugged in an MCP Inspector as a diagnostic layer, giving me visibility to monitor and troubleshoot every message passing through the pipeline.
+
+### MCP architecture
+
+\`\`\`text
+Claude Desktop
+      |
+      v
+MCP Proxy (Windows host)
+      |
+      v
+FastMCP Server (Kali Linux VM) ---> Security tools
+      ^
+      |
+MCP Inspector (diagnostics)
+
+Network boundary: host-only, local environment
+\`\`\`
+
+What made this architecture truly valuable was that the AI was no longer running wild as an unrestricted assistant. Instead, it was bound to a strict penetration testing methodology I designed. Every assessment had to start with broad network discovery before advancing to targeted enumeration. This stopped the AI from skipping foundational steps or chasing useless rabbit holes. The result was an automated partner that stayed disciplined, consistent, and aligned with the security practices I intended to follow.
+
+\`\`\`text
+Broad network discovery
+          |
+          v
+Targeted enumeration
+          |
+          v
+Review findings and choose the next step
+\`\`\`
+
+## Keeping Humans in Control
+
+Yet, despite all that automation power, one thing became crystal clear: human judgment is still the most critical part of the equation.
+
+Next, I’m building a custom interface that acts as a true safety net, letting me review, tweak, approve, or outright veto any AI-suggested command before it touches a network. I’m also looking into parallel execution so we can run multiple tools at once without losing control.
+
+### Human-in-the-loop oversight
+
+\`\`\`text
+AI suggests a command
+          |
+          v
+Human reviews, edits, approves, or rejects
+          |
+          v
+Approved command is executed
+\`\`\`
+
+## Final Thoughts
+
+At the end of the day, AI is great at execution, but it doesn’t do strategy. That responsibility still sits squarely on our shoulders.
+
+For anyone worried about AI taking over cybersecurity roles, the real question isn’t whether we’ll be replaced, but how quickly we can adapt. Understanding how these systems work under the hood, recognizing their limits, and weaving them into our day-to-day workflow won’t make us obsolete. It will make us far more effective.
+
+AI is an incredibly powerful partner. But the strategy, critical thinking, and ultimate decision-making still belong to the human behind the keyboard.
+
+### Strategic trajectory
+
+\`\`\`text
+AI-assisted execution
+        +
+Human judgment and strategy
+        |
+        v
+A controlled, repeatable workflow
+\`\`\`
+
+**Written by TheRoguePrince**`
+        }
+      ],
+
+      // ========================================================================
+      // 5. OPTIONAL PROJECTS / LINKS (Section stays hidden while empty)
+      // ========================================================================
+      projects: []
+    };
+  </script>
+
+  <!-- ==========================================================================
+       RENDERING & INLINE ARTICLE READER ENGINE
+  =========================================================================== -->
+  <script>
+    let currentCategory = "All";
+    let currentSearchQuery = "";
+    let expandedWriteupId = null;
+
+    function initPortfolio() {
+      syncProfileLinks();
+      renderExperience();
+      renderCertifications();
+      renderSkills();
+      renderWriteupsSection();
+      renderProjectsSection();
+
+      // Auto-expand writeup if URL hash points to #writeup-<id>
+      if (window.location.hash && window.location.hash.startsWith("#writeup-")) {
+        const targetId = window.location.hash.replace("#writeup-", "");
+        const exists = PORTFOLIO_DATA.writeups.some(w => w.id === targetId);
+        if (exists) {
+          expandedWriteupId = targetId;
+          renderWriteupsSection();
+          setTimeout(() => {
+            const cardEl = document.getElementById(`card-${targetId}`);
+            if (cardEl) cardEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 150);
+        }
+      }
+    }
+
+    function syncProfileLinks() {
+      const p = PORTFOLIO_DATA.profile;
+      document.getElementById("nav-author-name").textContent = p.name;
+      document.getElementById("hero-name-kicker").textContent = p.name;
+      document.getElementById("hero-status").textContent = p.status;
+      document.getElementById("hero-title").textContent = p.headline;
+      document.getElementById("footer-name").textContent = p.name;
+
+      const setLink = (id, url, hideIfBlank = false) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (url && url.trim() !== "") {
+          el.href = url.trim();
+          if (hideIfBlank) {
+            el.classList.remove("hidden");
+            if (id === "hero-github-btn") el.classList.add("inline-flex");
+          }
+        } else if (hideIfBlank) {
+          el.classList.add("hidden");
+          el.classList.remove("inline-flex");
+        }
+      };
+
+      setLink("nav-htb", p.links.hackthebox);
+      setLink("hero-htb-btn", p.links.hackthebox);
+      setLink("footer-htb", p.links.hackthebox);
+
+      setLink("hero-cpts-btn", p.links.cptsBadge);
+      setLink("footer-cpts", p.links.cptsBadge);
+
+      setLink("nav-linkedin", p.links.linkedin);
+      setLink("hero-linkedin-btn", p.links.linkedin);
+      setLink("footer-linkedin", p.links.linkedin);
+
+      setLink("nav-github", p.links.githubUrl, true);
+      setLink("hero-github-btn", p.links.githubUrl, true);
+      setLink("footer-github", p.links.githubUrl, true);
+    }
+
+    // ============================================================================
+    // 1. EXPERIENCE & PROFILE
+    // ============================================================================
+    function renderExperience() {
+      const container = document.getElementById("experience-container");
+      container.innerHTML = PORTFOLIO_DATA.experience.map(item => `
+        <div class="p-6 rounded-xl bg-amoled-surface border border-amoled-border flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-[11px] text-emerald-400 tracking-wider uppercase mb-3">
+              ${escapeHtml(item.tag)}
+            </div>
+            <h3 class="text-base font-semibold text-white tracking-tight">
+              ${escapeHtml(item.title)}
+            </h3>
+            <div class="font-mono text-xs text-zinc-500 mt-0.5">
+              ${escapeHtml(item.subtitle)}
+            </div>
+            <p class="mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              ${escapeHtml(item.description)}
+            </p>
+          </div>
+          ${item.linkUrl ? `
+            <div class="mt-5 pt-4 border-t border-amoled-border">
+              <a href="${escapeHtml(item.linkUrl)}" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1.5 font-mono text-xs text-zinc-200 hover:text-emerald-400 transition-colors">
+                <span>${escapeHtml(item.linkLabel || "View Profile ↗")}</span>
+              </a>
+            </div>
+          ` : ""}
+        </div>
+      `).join("");
+    }
+
+    // ============================================================================
+    // 2. CERTIFICATIONS
+    // ============================================================================
+    function renderCertifications() {
+      const container = document.getElementById("certs-container");
+      container.innerHTML = PORTFOLIO_DATA.certifications.map(cert => {
+        const hasVerifyUrl = cert.verifyUrl && cert.verifyUrl.trim() !== "";
+
+        return `
+          <div class="p-6 rounded-xl bg-amoled-surface border border-amoled-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="px-2.5 py-1 rounded-md bg-black border border-amoled-borderLight font-mono text-xs font-semibold text-white">
+                  ${escapeHtml(cert.code)}
+                </span>
+                <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-emerald-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  ${escapeHtml(cert.status)}
+                </span>
+              </div>
+
+              <h3 class="text-base sm:text-lg font-semibold text-white tracking-tight">${escapeHtml(cert.title)}</h3>
+              <div class="font-mono text-xs text-zinc-500 mt-0.5">Issuer: ${escapeHtml(cert.issuer)}</div>
+
+              <p class="mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                ${escapeHtml(cert.description)}
+              </p>
+
+              ${cert.highlights && cert.highlights.length ? `
+                <div class="mt-4 pt-4 border-t border-amoled-border space-y-1.5">
+                  ${cert.highlights.map(h => `
+                    <div class="flex items-center gap-2 text-xs text-zinc-300 font-mono">
+                      <span class="text-emerald-400">✓</span>
+                      <span>${escapeHtml(h)}</span>
+                    </div>
+                  `).join("")}
+                </div>
+              ` : ""}
+            </div>
+
+            ${hasVerifyUrl ? `
+              <div class="mt-6 pt-2">
+                <a href="${escapeHtml(cert.verifyUrl)}" target="_blank" rel="noopener noreferrer"
+                   class="w-full py-2.5 px-3 rounded-lg bg-black hover:bg-amoled-elevated text-zinc-200 border border-amoled-borderLight hover:border-zinc-500 font-mono text-xs flex items-center justify-center gap-1.5 transition-all">
+                  <span>Verify Credential Badge</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            ` : ""}
+          </div>
+        `;
+      }).join("");
+    }
+
+    // ============================================================================
+    // 3. SKILLS
+    // ============================================================================
+    function renderSkills() {
+      const container = document.getElementById("skills-container");
+      container.innerHTML = PORTFOLIO_DATA.skills.map(group => `
+        <div class="p-6 rounded-xl bg-amoled-surface border border-amoled-border flex flex-col">
+          <div class="pb-4 mb-4 border-b border-amoled-border">
+            <h3 class="text-base font-semibold text-white tracking-tight">${escapeHtml(group.category)}</h3>
+            <div class="font-mono text-[11px] text-emerald-400 mt-0.5">${escapeHtml(group.subtitle)}</div>
+          </div>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-zinc-300">
+            ${group.items.map(skill => `
+              <li class="flex items-start gap-2.5 leading-relaxed">
+                <span class="font-mono text-zinc-500 mt-0.5">›</span>
+                <span>${escapeHtml(skill)}</span>
+              </li>
+            `).join("")}
+          </ul>
+        </div>
+      `).join("");
+    }
+
+    // ============================================================================
+    // 4. WRITEUPS & INLINE EXPANDABLE READER
+    // ============================================================================
+    function renderWriteupsSection() {
+      const container = document.getElementById("writeups-container");
+      const controlsEl = document.getElementById("writeup-controls");
+      const tabsBarEl = document.getElementById("writeup-tabs-bar");
+      const countLabel = document.getElementById("writeup-count-label");
+
+      // Sleek "Publishing Soon" state when writeups array is empty
+      if (!PORTFOLIO_DATA.writeups || PORTFOLIO_DATA.writeups.length === 0) {
+        controlsEl.classList.add("hidden");
+        controlsEl.classList.remove("flex");
+        tabsBarEl.classList.add("hidden");
+        tabsBarEl.classList.remove("flex");
+
+        container.innerHTML = `
+          <div class="p-8 sm:p-10 rounded-xl bg-amoled-surface border border-amoled-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-2xl">
+              <div class="inline-flex items-center gap-2 font-mono text-[11px] text-emerald-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>WRITEUPS &amp; RESEARCH | PUBLISHING SOON</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-white tracking-tight">
+                HackTheBox Walkthroughs &amp; AI Security / MCP Articles
+              </h3>
+              <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Detailed HackTheBox machine writeups and articles on Model Context Protocol (MCP) and AI Security are currently being drafted and will be published here soon.
+              </p>
+            </div>
+            <a href="https://profile.hackthebox.com/profile/019c5aa6-b8c6-7060-8c85-8a674387efaf" target="_blank" rel="noopener noreferrer"
+               class="shrink-0 px-4 py-2.5 rounded-lg bg-black hover:bg-amoled-elevated text-zinc-200 border border-amoled-borderLight font-mono text-xs transition-colors">
+              HTB Profile (Prodigy) ↗
+            </a>
+          </div>
+        `;
+        return;
+      }
+
+      // When writeups exist in PORTFOLIO_DATA.writeups, show search + category tabs + expandable cards
+      controlsEl.classList.remove("hidden");
+      controlsEl.classList.add("flex");
+      tabsBarEl.classList.remove("hidden");
+      tabsBarEl.classList.add("flex");
+
+      renderCategoryTabs();
+
+      const filtered = PORTFOLIO_DATA.writeups.filter(item => {
+        const matchesCat = currentCategory === "All" || item.category === currentCategory;
+        const matchesSearch = !currentSearchQuery ||
+          item.title.toLowerCase().includes(currentSearchQuery) ||
+          (item.summary && item.summary.toLowerCase().includes(currentSearchQuery)) ||
+          (item.tags && item.tags.some(t => t.toLowerCase().includes(currentSearchQuery))) ||
+          (item.badge && item.badge.toLowerCase().includes(currentSearchQuery));
+        return matchesCat && matchesSearch;
       });
 
-      requestAnimationFrame(animateWaterDrift);
+      countLabel.textContent = `${filtered.length} ${filtered.length === 1 ? "article" : "articles"}`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 rounded-xl bg-amoled-surface border border-amoled-border text-center">
+            <p class="font-mono text-xs text-zinc-400">No writeups match your current filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const isExpanded = expandedWriteupId === item.id;
+        const hasInlineContent = item.content && item.content.trim().length > 0;
+
+        return `
+          <article id="card-${escapeHtml(item.id)}"
+                   class="rounded-xl transition-all border ${
+                     isExpanded
+                       ? "bg-[#060608] border-zinc-600 shadow-2xl"
+                       : "bg-amoled-surface hover:bg-amoled-elevated border-amoled-border hover:border-amoled-borderLight"
+                   }">
+            <!-- Clickable Card Header -->
+            <div onclick="toggleWriteupReader('${escapeHtml(item.id)}')"
+                 class="p-5 sm:p-6 cursor-pointer select-none">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                <div class="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+                  <span class="px-2 py-0.5 rounded bg-zinc-900 text-emerald-400 border border-emerald-500/25">
+                    ${escapeHtml(item.category)}
+                  </span>
+                  ${item.badge ? `
+                    <span class="px-2 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-amoled-border">
+                      ${escapeHtml(item.badge)}
+                    </span>
+                  ` : ""}
+                  ${item.date ? `<span class="text-zinc-500">${escapeHtml(item.date)}</span>` : ""}
+                  ${item.readTime ? `<span class="text-zinc-600">· ${escapeHtml(item.readTime)}</span>` : ""}
+                </div>
+
+                <div class="flex items-center gap-2">
+                  ${item.externalUrl ? `
+                    <a href="${escapeHtml(item.externalUrl)}" target="_blank" rel="noopener noreferrer"
+                       onclick="event.stopPropagation()"
+                       class="px-2.5 py-1 rounded-md bg-zinc-900 hover:bg-zinc-800 text-emerald-400 border border-amoled-borderLight font-mono text-[11px] transition-colors">
+                      ${escapeHtml(item.externalLabel || "External Link ↗")}
+                    </a>
+                  ` : ""}
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[11px] ${
+                    isExpanded
+                      ? "bg-white text-black font-semibold"
+                      : "bg-zinc-900/90 text-zinc-300 border border-amoled-border"
+                  }">
+                    <span>${isExpanded ? "Close Reader" : (hasInlineContent ? "Read Article" : "Expand")}</span>
+                    <svg class="w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <h3 class="text-base sm:text-lg font-semibold text-white tracking-tight">
+                ${escapeHtml(item.title)}
+              </h3>
+              ${item.summary ? `
+                <p class="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                  ${escapeHtml(item.summary)}
+                </p>
+              ` : ""}
+
+              ${item.tags && item.tags.length ? `
+                <div class="mt-4 flex flex-wrap items-center gap-1.5">
+                  ${item.tags.map(tag => `
+                    <span class="font-mono text-[11px] text-zinc-400 bg-black px-2 py-0.5 rounded border border-amoled-border">
+                      #${escapeHtml(tag)}
+                    </span>
+                  `).join("")}
+                </div>
+              ` : ""}
+            </div>
+
+            <!-- INLINE EXPANDED ARTICLE VIEW -->
+            ${isExpanded ? `
+              <div class="border-t border-amoled-borderLight bg-black px-5 sm:px-8 py-6 sm:py-8 rounded-b-xl">
+                <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-amoled-border text-xs font-mono text-zinc-400">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>ARTICLE READER</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button onclick="copyShareLink('${escapeHtml(item.id)}', this)"
+                            class="px-2.5 py-1 rounded bg-amoled-surface hover:bg-amoled-elevated text-zinc-300 border border-amoled-border transition-colors">
+                      Copy Link
+                    </button>
+                    ${item.externalUrl ? `
+                      <a href="${escapeHtml(item.externalUrl)}" target="_blank" rel="noopener noreferrer"
+                         class="px-2.5 py-1 rounded bg-amoled-surface hover:bg-amoled-elevated text-emerald-400 border border-amoled-border transition-colors">
+                        ${escapeHtml(item.externalLabel || "Open External Article ↗")}
+                      </a>
+                    ` : ""}
+                    <button onclick="toggleWriteupReader('${escapeHtml(item.id)}')"
+                            class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-amoled-borderLight transition-colors">
+                      ✕ Close
+                    </button>
+                  </div>
+                </div>
+
+                <div class="article-prose max-w-none">
+                  ${renderMarkdownToHtml(item.content || item.summary)}
+                </div>
+
+                <div class="mt-8 pt-5 border-t border-amoled-border flex items-center justify-between">
+                  <span class="font-mono text-xs text-zinc-500">${escapeHtml(item.title)}</span>
+                  <button onclick="toggleWriteupReader('${escapeHtml(item.id)}')"
+                          class="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-amoled-borderLight font-mono text-xs transition-colors">
+                    ↑ Collapse Article
+                  </button>
+                </div>
+              </div>
+            ` : ""}
+          </article>
+        `;
+      }).join("");
     }
 
-    animateWaterDrift();
-  }
-});
-</script>
+    function renderCategoryTabs() {
+      const dynamicCats = Array.from(new Set(PORTFOLIO_DATA.writeups.map(w => w.category).filter(Boolean)));
+      const categories = ["All", ...dynamicCats];
+      const tabsContainer = document.getElementById("writeup-tabs");
+
+      tabsContainer.innerHTML = categories.map(cat => {
+        const isActive = currentCategory === cat;
+        const count = cat === "All"
+          ? PORTFOLIO_DATA.writeups.length
+          : PORTFOLIO_DATA.writeups.filter(w => w.category === cat).length;
+
+        return `
+          <button onclick="setWriteupCategory('${cat.replace(/'/g, "\\'")}')"
+                  class="px-3 py-1.5 rounded-lg font-mono text-xs transition-all flex items-center gap-2 border ${
+                    isActive
+                      ? "bg-white text-black border-white font-semibold"
+                      : "bg-amoled-surface text-zinc-400 border-amoled-border hover:text-zinc-200 hover:border-amoled-borderLight"
+                  }">
+            <span>${escapeHtml(cat)}</span>
+            <span class="text-[10px] px-1.5 py-0.2 rounded ${
+              isActive ? "bg-black/15 text-black" : "bg-zinc-900 text-zinc-500"
+            }">${count}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function setWriteupCategory(cat) {
+      currentCategory = cat;
+      renderWriteupsSection();
+    }
+
+    function handleSearchWriteups(query) {
+      currentSearchQuery = query.trim().toLowerCase();
+      renderWriteupsSection();
+    }
+
+    function toggleWriteupReader(id) {
+      if (expandedWriteupId === id) {
+        expandedWriteupId = null;
+        history.replaceState(null, "", window.location.pathname);
+      } else {
+        expandedWriteupId = id;
+        history.replaceState(null, "", `#writeup-${id}`);
+      }
+      renderWriteupsSection();
+
+      if (expandedWriteupId) {
+        setTimeout(() => {
+          const el = document.getElementById(`card-${id}`);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 60);
+      }
+    }
+
+    function copyShareLink(id, btnEl) {
+      const shareUrl = `${window.location.origin}${window.location.pathname}#writeup-${id}`;
+      copyTextToClipboard(shareUrl);
+      const original = btnEl.textContent;
+      btnEl.textContent = "✓ Copied";
+      btnEl.classList.add("text-emerald-400");
+      setTimeout(() => {
+        btnEl.textContent = original;
+        btnEl.classList.remove("text-emerald-400");
+      }, 1800);
+    }
+
+    // ============================================================================
+    // 5. OPTIONAL PROJECTS SECTION (Hidden unless populated in code)
+    // ============================================================================
+    function renderProjectsSection() {
+      const sectionEl = document.getElementById("projects-section");
+      const container = document.getElementById("projects-container");
+
+      if (!PORTFOLIO_DATA.projects || PORTFOLIO_DATA.projects.length === 0) {
+        sectionEl.classList.add("hidden");
+        return;
+      }
+
+      sectionEl.classList.remove("hidden");
+      container.innerHTML = PORTFOLIO_DATA.projects.map(proj => `
+        <a href="${escapeHtml(proj.url || "#")}" target="_blank" rel="noopener noreferrer"
+           class="group p-5 sm:p-6 rounded-xl bg-amoled-surface hover:bg-amoled-elevated border border-amoled-border hover:border-amoled-borderLight transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="font-mono text-[11px] px-2.5 py-0.5 rounded bg-black text-zinc-300 border border-amoled-border">
+                ${escapeHtml(proj.type || "Project")}
+              </span>
+              <span class="font-mono text-xs text-zinc-500 group-hover:text-white transition-colors">
+                Open ↗
+              </span>
+            </div>
+            <h3 class="text-base font-semibold text-white group-hover:text-emerald-300 transition-colors tracking-tight">
+              ${escapeHtml(proj.title)}
+            </h3>
+            <p class="mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              ${escapeHtml(proj.description)}
+            </p>
+          </div>
+        </a>
+      `).join("");
+    }
+
+    // ============================================================================
+    // MARKDOWN PARSER FOR INLINE ARTICLE READER
+    // ============================================================================
+    function renderMarkdownToHtml(markdown) {
+      if (!markdown) return "<p>No content available.</p>";
+
+      const codeBlocks = [];
+      let processed = markdown.replace(/```([\w-]*)\n([\s\S]*?)```/g, (_, lang, code) => {
+        const placeholder = `___CODE_BLOCK_${codeBlocks.length}___`;
+        codeBlocks.push({ lang: lang || "code", code: code.replace(/\n$/, "") });
+        return placeholder;
+      });
+
+      const lines = processed.split("\n");
+      let html = "";
+      let inList = false;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+
+        if (!line) {
+          if (inList) {
+            html += "</ul>";
+            inList = false;
+          }
+          continue;
+        }
+
+        if (line.startsWith("___CODE_BLOCK_") && line.endsWith("___")) {
+          if (inList) { html += "</ul>"; inList = false; }
+          const idx = parseInt(line.replace("___CODE_BLOCK_", "").replace("___", ""), 10);
+          const block = codeBlocks[idx];
+          const encodedCode = encodeURIComponent(block.code);
+          html += `
+            <div class="my-4 rounded-xl overflow-hidden border border-amoled-borderLight bg-[#050507]">
+              <div class="px-3.5 py-2 bg-[#0c0c10] border-b border-amoled-border flex items-center justify-between">
+                <span class="font-mono text-[11px] text-zinc-400 uppercase">${escapeHtml(block.lang)}</span>
+                <button onclick="copyCodeBlock('${encodedCode}', this)"
+                        class="font-mono text-[11px] text-zinc-400 hover:text-white px-2 py-0.5 rounded bg-zinc-900 border border-amoled-border transition-colors">
+                  Copy Code
+                </button>
+              </div>
+              <pre class="p-4 text-xs font-mono text-zinc-200 overflow-x-auto leading-relaxed"><code>${escapeHtml(block.code)}</code></pre>
+            </div>
+          `;
+          continue;
+        }
+
+        if (line.startsWith("## ")) {
+          if (inList) { html += "</ul>"; inList = false; }
+          html += `<h2>${formatInlineMarkdown(line.slice(3))}</h2>`;
+        } else if (line.startsWith("### ")) {
+          if (inList) { html += "</ul>"; inList = false; }
+          html += `<h3>${formatInlineMarkdown(line.slice(4))}</h3>`;
+        } else if (line.startsWith("> ")) {
+          if (inList) { html += "</ul>"; inList = false; }
+          html += `<blockquote>${formatInlineMarkdown(line.slice(2))}</blockquote>`;
+        } else if (line.startsWith("- ")) {
+          if (!inList) { html += "<ul>"; inList = true; }
+          html += `<li>${formatInlineMarkdown(line.slice(2))}</li>`;
+        } else {
+          if (inList) { html += "</ul>"; inList = false; }
+          html += `<p>${formatInlineMarkdown(line)}</p>`;
+        }
+      }
+
+      if (inList) html += "</ul>";
+      return html;
+    }
+
+    function formatInlineMarkdown(text) {
+      let safe = escapeHtml(text);
+      safe = safe.replace(/`([^`]+)`/g, "<code>$1</code>");
+      safe = safe.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      safe = safe.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+      return safe;
+    }
+
+    function copyCodeBlock(encodedCode, btnEl) {
+      const decoded = decodeURIComponent(encodedCode);
+      copyTextToClipboard(decoded);
+      const original = btnEl.textContent;
+      btnEl.textContent = "✓ Copied";
+      btnEl.classList.add("text-emerald-400");
+      setTimeout(() => {
+        btnEl.textContent = original;
+        btnEl.classList.remove("text-emerald-400");
+      }, 1600);
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function copyTextToClipboard(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+      } catch (e) {
+        console.error("Copy failed", e);
+      }
+      document.body.removeChild(ta);
+    }
+
+    window.addEventListener("DOMContentLoaded", initPortfolio);
+  </script>
 </body>
 </html>
